@@ -2,9 +2,9 @@ import React, {Component} from "react"
 
 export default class Calculator extends Component {
     state = {
-        num1: "",
-        num2: "",
-        result: "",
+        num1: "0",
+        num2: "0",
+        result: "0",
         operator: "+"           
     }
 
@@ -20,11 +20,9 @@ export default class Calculator extends Component {
         this.setState(()=>{
             return {result: evalValue}
         })
-
     }
     
     render() {
-
         return (
             <>
             <div className="caclulator">
@@ -36,15 +34,17 @@ export default class Calculator extends Component {
                         value={this.state.num1}
                         onChange={this.setNum}
                     />
+                    
                     <select 
                     name = "operator"
-                    onClick = {this.setNum}
+                    onChange = {this.setNum}
                     >
                         <option value = "+">+</option>
                         <option value = "-">-</option>
                         <option value = "/">/</option>
                         <option value = "*">*</option>
                     </select>
+                    
                     <input type="number" 
                         name="num2"
                         value={this.state.num2}
