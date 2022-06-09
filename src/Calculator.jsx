@@ -4,15 +4,8 @@ export default class Calculator extends Component {
     state = {
         num1: "",
         num2: "",
-        sum: ""            
-    }
-
-    handleClear = () =>{
-        this.setState({
-            num1: "",
-            num2: "",
-            sum: ""
-        })
+        result: "",
+        operator: "+"           
     }
 
     setNum = (e) => {
@@ -23,9 +16,9 @@ export default class Calculator extends Component {
 
     handleCalculate = (e) =>{
         e.preventDefault()
-        let sumValue = Number(this.state.num1) + Number(this.state.num2)
+        let evalValue = eval(`${this.state.num1} ${this.state.operator} ${this.state.num2}`)
         this.setState(()=>{
-            return {sum: sumValue}
+            return {result: evalValue}
         })
 
     }
@@ -35,7 +28,7 @@ export default class Calculator extends Component {
         return (
             <>
             <div className="caclulator">
-                <h1>Add with React!</h1>
+                <h1>Calculate with React!</h1>
 
                 <form onSubmit={this.handleCalculate}>
                     <input type="number" 
@@ -43,14 +36,23 @@ export default class Calculator extends Component {
                         value={this.state.num1}
                         onChange={this.setNum}
                     />
-                    <span>+</span>
+                    <select 
+                    name = "operator"
+                    onClick = {this.setNum}
+                    >
+                        <option value = "+">+</option>
+                        <option value = "-">-</option>
+                        <option value = "/">/</option>
+                        <option value = "*">*</option>
+                    </select>
                     <input type="number" 
                         name="num2"
                         value={this.state.num2}
                         onChange={this.setNum}
                     />
                     <button>=</button>
-                    <h3>{this.state.sum}</h3>
+                    <h3>{this.state.result}</h3>
+                    
                 </form>
             </div>
             </>
